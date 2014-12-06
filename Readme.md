@@ -5,7 +5,7 @@ Utility around the `flag` package  to set the default value from an ENV variable
 ## Example
 
     var port String
-    nflag.Var(&port, "PORT", "bind-address", ":3000", "default server address")
+    nflag.StringVar(&port, "PORT", "bind-address", ":3000", "default server address")
 
 Use default
 
