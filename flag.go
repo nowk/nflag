@@ -1,4 +1,4 @@
-package enfl
+package nflag
 
 import (
 	"flag"
