@@ -77,3 +77,35 @@ func UintVar(p *uint, n, fl string, d uint, usage string) {
 func Uint64Var(p *uint64, n, fl string, d uint64, usage string) {
 	flag.Uint64Var(p, fl, def(n, d).(uint64), usage)
 }
+
+func Bool(p *bool, n, fl string, d bool, usage string) *bool {
+	return flag.Bool(fl, def(n, d).(bool), usage)
+}
+
+func Duration(p *time.Duration, n, fl string, d time.Duration, usage string) *time.Duration {
+	return flag.Duration(fl, def(n, d).(time.Duration), usage)
+}
+
+func Float64(n, fl string, d float64, usage string) *float64 {
+	return flag.Float64(fl, def(n, d).(float64), usage)
+}
+
+func Int(n, fl string, d int, usage string) *int {
+	return flag.Int(fl, def(n, d).(int), usage)
+}
+
+func Int64(n, fl string, d int64, usage string) *int64 {
+	return flag.Int64(fl, def(n, d).(int64), usage)
+}
+
+func String(n, fl string, d string, usage string) *string {
+	return flag.String(fl, def(n, d).(string), usage)
+}
+
+func Uint(n, fl string, d uint, usage string) *uint {
+	return flag.Uint(fl, def(n, d).(uint), usage)
+}
+
+func Uint64(n, fl string, d uint64, usage string) *uint64 {
+	return flag.Uint64(fl, def(n, d).(uint64), usage)
+}
