@@ -2,45 +2,78 @@ package nflag
 
 import (
 	"flag"
-	"github.com/segmentio/go-env"
+	"os"
 	"time"
 )
 
-// Var looks up the env value first, then defaults to flag
-func Var(p interface{}, en, fl string, def interface{}, usage string) {
-	var d interface{}
-
-	e, err := env.Get(en)
-	if err != nil {
-		d = def
-	} else {
-		d = e
-	}
-
-	// var method is determined by the default value (def)
-	switch def.(type) {
+// Var type checks the default value to call the proper <T>Var function
+func Var(p interface{}, n, fl string, d interface{}, usage string) {
+	switch d.(type) {
 	case bool:
-		flag.BoolVar(p.(*bool), fl, d.(bool), usage)
+		BoolVar(p.(*bool), n, fl, d.(bool), usage)
 
 	case time.Duration:
-		flag.DurationVar(p.(*time.Duration), fl, d.(time.Duration), usage)
+		DurationVar(p.(*time.Duration), n, fl, d.(time.Duration), usage)
 
 	case float64:
-		flag.Float64Var(p.(*float64), fl, d.(float64), usage)
+		Float64Var(p.(*float64), n, fl, d.(float64), usage)
 
 	case int:
-		flag.IntVar(p.(*int), fl, d.(int), usage)
+		IntVar(p.(*int), n, fl, d.(int), usage)
 
 	case int64:
-		flag.Int64Var(p.(*int64), fl, d.(int64), usage)
+		Int64Var(p.(*int64), n, fl, d.(int64), usage)
 
 	case string:
-		flag.StringVar(p.(*string), fl, d.(string), usage)
+		StringVar(p.(*string), n, fl, d.(string), usage)
 
 	case uint:
-		flag.UintVar(p.(*uint), fl, d.(uint), usage)
+		UintVar(p.(*uint), n, fl, d.(uint), usage)
 
 	case uint64:
-		flag.Uint64Var(p.(*uint64), fl, d.(uint64), usage)
+		Uint64Var(p.(*uint64), n, fl, d.(uint64), usage)
 	}
+}
+
+// def looks up env and returns that or the default depending on whether it was
+// set
+func def(n string, d interface{}) interface{} {
+	s := os.Getenv(n)
+	if s == "" {
+		return d
+	}
+
+	return s
+}
+
+func BoolVar(p *bool, n, fl string, d bool, usage string) {
+	flag.BoolVar(p, fl, def(n, d).(bool), usage)
+}
+
+func DurationVar(p *time.Duration, n, fl string, d time.Duration, usage string) {
+	flag.DurationVar(p, fl, def(n, d).(time.Duration), usage)
+}
+
+func Float64Var(p *float64, n, fl string, d float64, usage string) {
+	flag.Float64Var(p, fl, def(n, d).(float64), usage)
+}
+
+func IntVar(p *int, n, fl string, d int, usage string) {
+	flag.IntVar(p, fl, def(n, d).(int), usage)
+}
+
+func Int64Var(p *int64, n, fl string, d int64, usage string) {
+	flag.Int64Var(p, fl, def(n, d).(int64), usage)
+}
+
+func StringVar(p *string, n, fl string, d string, usage string) {
+	flag.StringVar(p, fl, def(n, d).(string), usage)
+}
+
+func UintVar(p *uint, n, fl string, d uint, usage string) {
+	flag.UintVar(p, fl, def(n, d).(uint), usage)
+}
+
+func Uint64Var(p *uint64, n, fl string, d uint64, usage string) {
+	flag.Uint64Var(p, fl, def(n, d).(uint64), usage)
 }
