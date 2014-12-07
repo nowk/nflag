@@ -59,40 +59,64 @@ func Uint64Var(p *uint64, n, fl string, d uint64, usage string) {
 
 // Bool calls flag.Bool
 func Bool(n, fl string, d bool, usage string) *bool {
-	return flag.Bool(fl, def(n, d).(bool), usage)
+	var v bool
+	BoolVar(&v, n, fl, d, usage)
+
+	return &v
 }
 
 // Duration calls flag.Duration
 func Duration(n, fl string, d time.Duration, usage string) *time.Duration {
-	return flag.Duration(fl, def(n, d).(time.Duration), usage)
+	var v time.Duration
+	DurationVar(&v, n, fl, d, usage)
+
+	return &v
 }
 
 // Float64 calls flag.Float64
 func Float64(n, fl string, d float64, usage string) *float64 {
-	return flag.Float64(fl, def(n, d).(float64), usage)
+	var v float64
+	Float64Var(&v, n, fl, d, usage)
+
+	return &v
 }
 
 // Int calls flag.Int
 func Int(n, fl string, d int, usage string) *int {
-	return flag.Int(fl, def(n, d).(int), usage)
+	var v int
+	IntVar(&v, n, fl, d, usage)
+
+	return &v
 }
 
 // Int64 calls flag.Int64
 func Int64(n, fl string, d int64, usage string) *int64 {
-	return flag.Int64(fl, def(n, d).(int64), usage)
+	var v int64
+	Int64Var(&v, n, fl, d, usage)
+
+	return &v
 }
 
 // String calls flag.String
 func String(n, fl string, d string, usage string) *string {
-	return flag.String(fl, def(n, d).(string), usage)
+	var v string
+	StringVar(&v, n, fl, d, usage)
+
+	return &v
 }
 
 // Uint calls flag.Uint
 func Uint(n, fl string, d uint, usage string) *uint {
-	return flag.Uint(fl, def(n, d).(uint), usage)
+	var v uint
+	UintVar(&v, n, fl, d, usage)
+
+	return &v
 }
 
 // Uint64 calls flag.Uint64
 func Uint64(n, fl string, d uint64, usage string) *uint64 {
-	return flag.Uint64(fl, def(n, d).(uint64), usage)
+	var v uint64
+	Uint64Var(&v, n, fl, d, usage)
+
+	return &v
 }
