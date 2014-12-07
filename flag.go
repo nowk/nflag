@@ -58,12 +58,12 @@ func Uint64Var(p *uint64, n, fl string, d uint64, usage string) {
 }
 
 // Bool calls flag.Bool
-func Bool(p *bool, n, fl string, d bool, usage string) *bool {
+func Bool(n, fl string, d bool, usage string) *bool {
 	return flag.Bool(fl, def(n, d).(bool), usage)
 }
 
 // Duration calls flag.Duration
-func Duration(p *time.Duration, n, fl string, d time.Duration, usage string) *time.Duration {
+func Duration(n, fl string, d time.Duration, usage string) *time.Duration {
 	return flag.Duration(fl, def(n, d).(time.Duration), usage)
 }
 
