@@ -6,6 +6,16 @@ import (
 	"time"
 )
 
+// Parse is a shortcut to flag.Parse()
+func Parse() {
+	flag.Parse()
+}
+
+// Parsed is a shortcut to flag.Parsed()
+func Parsed() bool {
+	return flag.Parsed()
+}
+
 // def looks up env and returns that or the default depending on whether it was
 // set
 func def(n string, d interface{}) interface{} {
