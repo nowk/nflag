@@ -2,6 +2,10 @@
 
 Utility around the `flag` package  to set the default value from an ENV variable, which can be overridden by setting the flag. 
 
+## Install
+
+    go get gopkg.in/nowk/nflag.v1
+
 ## Example
 
     var port String
